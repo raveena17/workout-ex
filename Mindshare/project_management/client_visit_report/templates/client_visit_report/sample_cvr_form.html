@@ -1,0 +1,422 @@
+{% extends "base.html" %} 
+{% include "cvr/cvr.html" %}
+
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css" title="standard-css1" />
+    <link href="/static/css/forms.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block script %}
+    <script type="application/javascript" language="JavaScript" src="/static/js/Validation.js"></script>
+    <script type="application/javascript" src="/static/js/jquery-1.3.2.min.js"></script>
+{% endblock %}
+
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% load bootstrap %}
+{% block content %}
+<link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<script src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.bootcss.com/moment.js/2.17.1/moment.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/js/bootstrap-datetimepicker.min.js"></script>
+
+
+{% block title %} Re-Use {% endblock %}
+{% block programcontent %} {% endblock %} 
+{% block programmenu %}{% endblock %} 
+{% block taskmenus %} {% endblock %}
+{% block contentdata %}
+<form name="contacts" id="contacts" action="." method="post">
+
+    <center><h1> client visit report </h1><table border="2">
+    <div class="container" style="max-width:600px;margin:10px auto;">
+
+        
+        <form method="POST" class="cvrForm">{% csrf_token %}
+            {{form.as_table}}
+
+        </form>
+
+    </div>
+    </table>
+    <button type="submit" class="save btn btn-default">{{action}}</button>
+
+    
+    </center> 
+
+                 
+</form>
+
+
+{% endblock %} 
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+<!-- #show approve -->
+
+ <!--        <tbody>
+
+            {% for post in postlist %}
+            <label for="post{{ forloop.counter }}">
+                {% if post.is_approved %}
+                <tr class="task-content">
+                    <td class="task-column">
+                        <input type="checkbox" id="post_pk" name="post_pk" value="{{post.pk}}" />
+                        <a href="/clientvisitreport/update/{{post.pk}}/">View</a>
+                    </td>
+                    <td class="task-column">{{post.prepared_by}}</td>
+                    <td class="task-column">{{post.project_name}}</td>
+                    <td class="task-column">{{post.client_name}}</td>
+                    <td class="task-column">{{post.visit_location}}</td>
+                    <td class="task-column">{{post.date_of_visit}}</td>
+                    <td class="task-column">{{post.reporting_senior_name}}</td>
+
+                        {% if request.user.username == post.prepared_by %}
+                            {% if post.is_approved %}
+                                <td class="task-column">approved</td>
+                            {% else %}
+                                <td class="task-column">pending</td>
+                            {% endif %}
+                                
+                        {% elif request.user.username != post.reporting_senior_name %}
+                            {% if post.is_approved %}
+                                <td class="task-column">approved</td>
+                            {% else %}
+                                <td class="task-column">waiting for approval</td>
+                            {% endif %}
+                        {% endif %} 
+                                          
+                            
+                        
+
+                   
+                   
+            </tr>
+            {% endif %}  
+            </label>
+            {% endfor %}
+       
+        </tbody>
+ -->
+
+
+
+
+
+
+
+<!-- <form method="POST" class="cvrForm">{% csrf_token %}
+    {{form.as_table}}
+    {% for field in form %}
+    <div class="form-group">
+        <label id='project_name'>Project Name:</label>
+        {{ field }}
+    </div>
+
+    {% endfor %}
+    <button type="submit" class="save btn btn-default">{{action}}</button>
+</form>
+
+<form method="POST" class="cvrForm">{% csrf_token %}
+
+
+
+        {{form.as_table}}
+
+
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="save btn btn-default">{{action}}</button>
+            </div>
+        </div>
+    </form>
+
+ -->
+
+
+
+
+
+
+
+<!-- cvr_form
+ -->
+
+<!--  {% extends "base.html" %} 
+{% include "cvr/cvr.html" %}
+
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css" title="standard-css1" />
+    <link href="/static/css/forms.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block script %}
+    <script type="application/javascript" language="JavaScript" src="/static/js/Validation.js"></script>
+    <script type="application/javascript" src="/static/js/jquery-1.3.2.min.js"></script>
+{% endblock %}
+
+{% load staticfiles %}
+{% block content %}
+{% block title %} Re-Use {% endblock %}
+{% block programcontent %} {% endblock %} 
+{% block programmenu %}{% endblock %} 
+{% block taskmenus %} {% endblock %}
+{% block contentdata %}
+
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#date_of_visit" ).datepicker({dateFormat: 'yy-mm-dd'});
+    $( "#date_of_approval" ).datepicker({dateFormat: 'yy-mm-dd'});
+  } );
+  </script>
+
+<style type="text/css">
+.form-style-3{
+    max-width: 450px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+.form-style-3 label{
+    display:block;
+    margin-bottom: 10px;
+}
+.form-style-3 label > span{
+    float: left;
+    width: 100px;
+    color: #666;
+    font-weight: bold;
+    font-size: 13px;
+    text-shadow: 1px 1px 1px #fff;
+}
+.form-style-3 fieldset{
+    width : 500px;
+    height: 610px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    margin: 0px 0px 10px 0px;
+    border: 1px solid #e1e1e1;
+    padding: 20px;
+    background: #fafafa;
+    box-shadow: inset 0px 0px 15px #fafafa;
+    -moz-box-shadow: inset 0px 0px 15px #fafafa;
+    -webkit-box-shadow: inset 0px 0px 15px #fafafa;
+}
+.form-style-3 fieldset legend{
+    color: #666;
+    border-top: 1px solid #e1e1e1;
+    border-left: 1px solid #e1e1e1;
+    border-right: 1px solid #e1e1e1;
+    border-radius: 5px 5px 0px 0px;
+    -webkit-border-radius: 5px 5px 0px 0px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    background: #fafafa;
+    padding: 0px 8px 3px 8px;
+    box-shadow: -0px -1px 2px red;
+    -moz-box-shadow:-0px -1px 2px #fafafa;
+    -webkit-box-shadow:-0px -1px 2px #fafafa;
+    font-weight: normal;
+    font-size: 12px;
+}
+.form-style-3 textarea{
+    width:10px;
+    height:50px;
+}
+.form-style-3 input[type=text],
+.form-style-3 input[type=date],
+.form-style-3 input[type=datetime],
+.form-style-3 input[type=number],
+.form-style-3 input[type=search],
+.form-style-3 input[type=time],
+.form-style-3 input[type=url],
+.form-style-3 select,
+.form-style-3 textarea{
+    /*max-width: 10px;*/
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border: 1px solid #e1e1e1;
+    outline: none;
+    color: black;
+    padding: 5px 8px 5px 8px;
+    box-shadow: inset 1px 1px 4px #e1e1e1;
+    -moz-box-shadow: inset 1px 1px 4px #e1e1e1;
+    -webkit-box-shadow: inset 1px 1px 4px #e1e1e1;
+    background: #e1e1e1;
+    width:50%;
+}
+.form-style-3  input[type=submit],
+.form-style-3  input[type=button]{
+    background: #e1e1e1;
+    /*border: 1px solid #C94A81;*/
+    border: 1px solid #e1e1e1;
+    padding: 5px 15px 5px 15px;
+    color: #e1e1e1;
+    box-shadow: inset -1px -1px 3px #fafafa;
+    -moz-box-shadow: inset -1px -1px 3px #fafafa;
+    -webkit-box-shadow: inset -1px -1px 3px #fafafa;
+    border-radius: 3px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;   
+    font-weight: bold;
+}
+.required{
+    color:red;
+    font-weight:normal;
+}
+
+
+.cvr_form select,
+.cvr_form input,
+.cvr_form textarea {
+    width: 240px !important;
+}
+
+</style>
+
+
+
+<form name="contacts" id="contacts" action="/clientvisitreport/new/" method="post">{% csrf_token %}
+
+    <center>
+
+    <table border="5">
+
+        <div class="form-style-3">
+        
+        <fieldset class = "cvr_form"><legend><b>CLIENT VISIT REPORT<b></legend>
+
+
+        <!-- <label for="field1"><span>Prepard By <span class="required">*</span></span><input type="text" class="input-field" name="prepard_by" value={{request.user.username}} /></label> -->
+
+        <label for="field"><span>Project Name 
+            <span class="required">*</span></span>
+            <select name="project_name" >
+                {% for project_name in project_names %}
+                    <option value="{{project_name.id}}" 
+                    {% if project_name.id == project %} selected="selected" {% endif %}> {{project_name.name}}
+                    </option>
+                {% endfor %}
+            </select>
+        </label>
+
+        <label for="field1"><span>Client Name 
+            <span class="required">*</span></span>
+            <select name="client_name">
+                {% for client_name in client_names %}
+                    <option value="{{client_name.id}}"
+                    {% if client_name.id == client %} selected="selected" {% endif %}> {{client_name}}
+                    </option> 
+                {% endfor %}
+            </select>
+        </label>
+
+        {% if object.visit_location %}
+        <label for="field1"><span>Visit Location <span class="required">*</span></span><input type="text" class="input-field" name="visit_location" value={{object.visit_location}} required/></label>
+        {% else %}
+        <label for="field1"><span>Visit Location <span class="required">*</span></span><input type="text" class="input-field" name="visit_location" value="" required/></label>
+        {% endif %}
+
+
+        {% if object.date_of_visit %}
+        <label for="field1"><span>Date Of Visit <span class="required">*</span></span><input type="text" id="date_of_visit" class="input-field" name="date_of_visit" value={{object.date_of_visit}} required/></label>
+        {% else %}
+        <label for="field1"><span>Date Of Visit <span class="required">*</span></span><input type="text" id="date_of_visit" class="input-field" name="date_of_visit" value="" required/></label>
+        {% endif %}
+
+
+        {% if object.arrival_time %}
+        <label for="field1"><span>Arrival Time</span><input id="time" type="time" name="arrival_time" value={{object.arrival_time}} /> </label>
+        {% else %}
+        <label for="field1"><span>Arrival Time </span><input id="time" type="time" name="arrival_time" value=""/></label>
+        {% endif %}
+
+
+        {% if object.departure_time %}
+        <label for="field1"><span>Departure Time </span><input id="time" type="time" name="departure_time" value={{object.departure_time}}/></label>
+        {% else %}
+        <label for="field1"><span>Departure Time </span><input id="time" type="time" name="departure_time" value=""/></label>
+        {% endif %}
+
+
+        {% if object.comments %}
+        <label for="field6"><span>Comments </span><textarea name="comments" class="textarea-field" value={{object.comments}}>{{object.comments}}</textarea></label>
+        {% else %}
+        <label for="field6"><span>Comments </span><textarea name="comments" class="textarea-field"></textarea></label>
+        {% endif %}
+
+
+        {% if object.reason_for_visit %}
+        <label for="field6"><span>Purpose <span class="required">*</span></span><textarea name="reason_for_visit" value={{object.reason_for_visit}} class="textarea-field" required>{{object.reason_for_visit}}</textarea></label>
+        {% else %}
+        <label for="field6"><span>Purpose <span class="required">*</span></span><textarea name="reason_for_visit" class="textarea-field" required></textarea></label>
+        {% endif %}
+
+
+        {% if object.actions_taken_during_the_visit %}
+        <label for="field6"><span>Actions Taken During The Visit <span class="required">*</span></span><textarea name="actions_taken_during_the_visit" value={{object.actions_taken_during_the_visit}} class="textarea-field" required>{{object.actions_taken_during_the_visit}}</textarea></label>
+        {% else %}
+        <label for="field6"><span>Actions Taken During The Visit <span class="required">*</span></span><textarea name="actions_taken_during_the_visit" class="textarea-field" required></textarea></label>
+        {% endif %}
+
+
+        {% if object.next_plan_of_action %}
+        <label for="field6"><span>Next Plan Of Action <span class="required">*</span></span><textarea name="next_plan_of_action" value={{object.next_plan_of_action}} class="textarea-field">{{object.next_plan_of_action}}</textarea></label>
+        {% else %}
+        <label for="field6"><span>Next Plan Of Action <span class="required">*</span></span><textarea name="next_plan_of_action" class="textarea-field"></textarea></label>
+        {% endif %}
+
+
+        <label for="field1"><span>Reporting Senior 
+            <span class="required">*</span></span>
+            <select name="reporting_senior_name">
+                {% for reporting_senior_name in reporting_senior_names %}
+                    <option value="{{reporting_senior_name.id}}"
+                    {% if reporting_senior_name.id == approve %} selected="selected"{% endif %}> {{reporting_senior_name.username}}
+                {% endfor %}
+            </select>
+        </label>
+
+
+        </fieldset>
+        
+        </div>
+    
+    </table>
+    {% csrf_token %}
+    
+    {% if request.user.id == approve %}
+        <a href = "/clientvisitreport/request/{{object.id}}">
+        <input type="button"  name="approve" value ="Approve"></a>  
+    {% else %}
+        <input type="submit" name="add"></a>    
+    {% endif %}
+
+
+    </center> 
+
+                 
+</form>
+
+{% endblock %} 
+{% endblock %}
+ -->

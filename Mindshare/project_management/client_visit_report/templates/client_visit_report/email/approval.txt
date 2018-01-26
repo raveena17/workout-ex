@@ -1,0 +1,8 @@
+Dear 
+
+
+Your client visit report hasbeen approved
+
+Thanks
+{{request.user.username}}
+

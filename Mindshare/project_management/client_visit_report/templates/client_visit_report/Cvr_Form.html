@@ -1,0 +1,192 @@
+{% extends "base.html" %} 
+{% include "cvr/cvr.html" %}
+
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css" title="standard-css1" />
+    <link href="/static/css/forms.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/cvr.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block script %}
+    <script type="application/javascript" language="JavaScript" src="/static/js/Validation.js"></script>
+    <script type="application/javascript" src="/static/js/jquery-1.3.2.min.js"></script>
+{% endblock %}
+
+{% load staticfiles %}
+{% block content %}
+{% block title %} Re-Use {% endblock %}
+{% block programcontent %} {% endblock %} 
+{% block programmenu %}{% endblock %} 
+{% block taskmenus %} {% endblock %}
+{% block contentdata %}
+
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#date_of_visit" ).datepicker({dateFormat: 'yy-mm-dd'});
+    $( "#date_of_approval" ).datepicker({dateFormat: 'yy-mm-dd'});
+  } );
+  </script>
+
+
+
+
+<form name="contacts" id="contacts" action="/clientvisitreports/create/" method="post">{% csrf_token %}
+
+    <center>
+
+    <table border="5">
+
+        <div class="form-style-3">
+        
+        <fieldset class = "cvr_form"><legend><b>CLIENT VISIT REPORT<b></legend>
+
+        <label for="field"><span>Project Name 
+            <span class="required">*</span></span>
+            <select name="project_name" style="width:240px;">
+                {% for project_name in project_names %}
+                    <option value="{{project_name.id}}" 
+                    {% if project_name.id == project %} selected="selected" {% endif %}> {{project_name.name}}
+                    </option>
+                {% endfor %}
+            </select>
+        </label>
+
+        <label for="field1"><span>Client Name 
+            <span class="required">*</span></span>
+            <select name="client_name" style="width:240px;">
+                {% for client_name in client_names %}
+                    <option value="{{client_name.id}}"
+                    {% if client_name.id == client %} selected="selected" {% endif %}> {{client_name}}
+                    </option> 
+                {% endfor %}
+            </select>
+        </label>
+
+
+        {% if object.id %}
+         <input type="hidden" name="object" value="{{object.id}}">
+        {% else %}
+         <input type="hidden" name="object" value="">
+        {% endif %}
+
+
+        {% if object.visit_location %}
+        <label for="field1"><span>Visit Location <span class="required">*</span></span><input type="text" class="input-field" name="visit_location" value={{object.visit_location}} required/></label>
+        {% else %}
+        <label for="field1"><span>Visit Location <span class="required">*</span></span><input type="text" class="input-field" name="visit_location" value="" required/></label>
+        {% endif %}
+
+
+        {% if object.date_of_visit %}
+        <label for="field1"><span>Date Of Visit <span class="required">*</span></span><input type="text" id="date_of_visit" class="input-field" name="date_of_visit" value={{object.date_of_visit}} required/></label>
+        {% else %}
+        <label for="field1"><span>Date Of Visit <span class="required">*</span></span><input type="text" id="date_of_visit" class="input-field" name="date_of_visit" value="" required/></label>
+        {% endif %}
+
+        {% if object.arrival_time %}
+        <label for="field1"><span>Arrival Time</span>
+            <input id="time" type="time" name="arrival_time" value={{object.arrival_time}} /> </label>
+        {% else %}
+        <label for="field1"><span>Arrival Time </span><input id="time" type="time" name="arrival_time" value=""/></label>
+        {% endif %}
+
+        {% if object.departure_time %}
+        <label for="field1"><span>Departure Time </span><input id="time" type="time" name="departure_time" value={{object.departure_time}}/></label>
+        {% else %}
+        <label for="field1"><span>Departure Time </span><input id="time" type="time" name="departure_time" value=""/></label>
+        {% endif %}
+
+        {% if object.reason_for_visit %}
+        <label for="field6"><span>Purpose <span class="required">*</span></span><textarea name="reason_for_visit" value={{object.reason_for_visit}} class="textarea-field" required>{{object.reason_for_visit}}</textarea></label>
+        {% else %}
+        <label for="field6"><span>Purpose <span class="required">*</span></span><textarea name="reason_for_visit" class="textarea-field" required></textarea></label>
+        {% endif %}
+
+        {% if object.actions_taken_during_the_visit %}
+        <label for="field6"><span>Actions Taken During The Visit <span class="required">*</span></span><textarea name="actions_taken_during_the_visit" value={{object.actions_taken_during_the_visit}} class="textarea-field" required>{{object.actions_taken_during_the_visit}}</textarea></label>
+        {% else %}
+        <label for="field6"><span>Actions Taken During The Visit <span class="required">*</span></span><textarea name="actions_taken_during_the_visit" class="textarea-field" required></textarea></label>
+        {% endif %}
+
+        {% if object.next_plan_of_action %}
+        <label for="field6"><span>Next Plan Of Action <span class="required">*</span></span><textarea name="next_plan_of_action" value={{object.next_plan_of_action}} class="textarea-field">{{object.next_plan_of_action}}</textarea></label>
+        {% else %}
+        <label for="field6"><span>Next Plan Of Action <span class="required">*</span></span><textarea name="next_plan_of_action" class="textarea-field"></textarea></label>
+        {% endif %}
+
+        {% if object.comments %}
+        <label for="field6"><span>Comments </span><textarea name="comments" class="textarea-field" value={{object.comments}}>{{object.comments}}</textarea></label>
+        {% else %}
+        <label for="field6"><span>Comments </span><textarea name="comments" class="textarea-field"></textarea></label>
+        {% endif %}
+
+        <label for="field1"><span>Reporting Senior 
+            <span class="required">*</span></span>
+            <select name="reporting_senior_name" style="width:240px;">
+                {% for reporting_senior_name in reporting_senior_names %}
+                    <option value="{{reporting_senior_name.id}}"
+                    {% if reporting_senior_name.id == approve %} selected="selected"{% endif %}> {{reporting_senior_name.username}}
+                {% endfor %}
+            </select>
+        </label>
+        </fieldset>
+        
+        </div>
+    
+    </table>
+
+    <input type="hidden" name="dischargeReason" id="setReasonForLeaving">
+
+    {% csrf_token %}
+    {% if object.is_approved or object.is_rejected %}
+        <a href = "/clientvisitreports/">
+            <input type="button" value = "cancel" name="cancel"></a>
+    {% else %}
+
+    
+    {% if request.user.id == approve %}
+        <a href = "/clientvisitreports/approve/{{object.id}}">
+        <input type="button"  name="approve" value ="Approve"></a>
+
+        <a href = "/clientvisitreports/reject/{{object.id}}">
+        <input type="button"  name="reject" value ="Reject"></a> 
+
+
+        </ul>
+        <a href="/clientvisitreports/addtask/" rel="#task_overlay" title="More non project tasks">               ...more 
+         </a>
+    {% else %}
+
+
+    {% if object.id %}
+        <a href = "/clientvisitreports/request/">
+        <input type="submit" name="add" value="update"></a>
+    {% else %}
+        <a href = "/clientvisitreports/request/">
+        <input type="submit" name="add"></a>    
+    {% endif %}
+
+    {% endif %}
+{% endif %}
+
+
+
+    </center> 
+
+                 
+</form>
+
+{% endblock %} 
+{% endblock %}
+
+
+
+
+        

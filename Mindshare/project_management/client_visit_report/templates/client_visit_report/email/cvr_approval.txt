@@ -1,0 +1,6 @@
+Hello {{reporting_senior_name}},
+
+Check the CVR form: {{full_domain}} 
+
+Regards,
+{{request_user}}

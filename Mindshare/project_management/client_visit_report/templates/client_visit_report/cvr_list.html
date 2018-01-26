@@ -1,0 +1,134 @@
+{% extends "base.html" %} 
+{% include "cvr/cvr.html" %}
+{% load staticfiles %}
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css" title="standard-css1" />
+    <link href="/static/css/forms.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block script %}
+    <script type="application/javascript" language="JavaScript" src="/static/js/Validation.js"></script>
+    <script type="application/javascript" src="/static/js/jquery-1.3.2.min.js"></script>
+{% endblock %}
+
+{% load static %}
+  <script src="/static 'js/jquery-1.12.4.js' "></script>
+  <script src="/static 'js/jquery.dataTables.min.js' "></script>
+  <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.dataTables.min.css' %}" /> -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css
+" />
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#table_id1').DataTable({"scrollX": true}); 
+
+} );
+
+
+function delete_fun(id){
+  $.ajax({ 
+  url: '/clientvisitreport/delete_cvr_report/', 
+  type: 'GET', 
+  data: {"id":id},
+ success: function(json) {
+                       
+                       location.reload(); 
+                       $("#msg").html(json);
+                   }
+});
+}
+</script>
+
+{% load staticfiles %}
+{% block content %}
+{% block title %} Re-Use {% endblock %}
+{% block programcontent %} {% endblock %} 
+{% block programmenu %}{% endblock %} 
+{% block taskmenus %} {% endblock %}
+{% block contentdata %}
+
+<body><center>
+  <h1>Client Visit Report</h1><br><br>
+{% if postlist %} 
+   
+     {% csrf_token %}
+     <table border="2" id="table_id1" width = "300" background-color: "#fafafa">
+        <thead>
+        <tr>
+          <th>Prepared By</th>
+          <th>Project Name</th> 
+          <th>Client Name</th>
+          <th>Visit Location</th>
+          <th>Date Of Visit</th>
+          <th>Arrival Time</th>
+          <th>Departure Time</th>
+          <th>Reason For Visit</th>
+          <th>Reporting Senior Name</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+          {% for post in postlist %}
+          <label for="post{{ forloop.counter }}">
+     <tr>
+          <td>{{post.prepared_by}}</td>
+          <td>{{post.project_name}}</td>
+          <td>{{post.client_name}}</td>
+          <td>{{post.visit_location}}</td>
+          <td>{{post.date_of_visit}}</td>
+          <td>{{post.arrival_time}}</td>
+          <td>{{post.departure_time}}</td>
+          <td>{{post.reason_for_visit}}</td>
+          <td>{{post.reporting_senior_name}}</td>
+          <td><input type = "button" onclick="delete_fun({{post.id}})" value="Delete" name="delete" id="{{forloop.counter}}"/></td>
+            
+        </tr></label>
+        {% endfor %}
+       
+     </tbody>
+     </table></center>
+{% else %}    
+
+   <strong>There is no post</strong>
+{%endif%}
+
+<center><a href="/clientvisitreport/new/" class="edit"><input type = "button" name = "add" value = "Add CVR" ></a></center>
+
+ 
+{% endblock %}
+{% endblock %} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

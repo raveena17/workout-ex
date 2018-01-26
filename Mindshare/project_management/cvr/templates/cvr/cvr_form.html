@@ -1,0 +1,238 @@
+{% extends "base.html" %} 
+{% include "cvr/cvr.html" %}
+
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css" title="standard-css1" />
+    <link href="/static/css/forms.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block script %}
+    <script type="application/javascript" language="JavaScript" src="/static/js/Validation.js"></script>
+    <script type="application/javascript" src="/static/js/jquery-1.3.2.min.js"></script>
+{% endblock %}
+
+{% load staticfiles %}
+{% block content %}
+{% block title %} Re-Use {% endblock %}
+{% block programcontent %} {% endblock %} 
+{% block programmenu %}{% endblock %} 
+{% block taskmenus %} {% endblock %}
+{% block contentdata %}
+
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#date_of_visit" ).datepicker({dateFormat: 'yy-mm-dd'});
+    $( "#date_of_approval" ).datepicker({dateFormat: 'yy-mm-dd'});
+  } );
+  </script>
+
+<style type="text/css">
+.form-style-3{
+    max-width: 450px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+.form-style-3 label{
+    display:block;
+    margin-bottom: 10px;
+}
+.form-style-3 label > span{
+    float: left;
+    width: 100px;
+    color: #666;
+    font-weight: bold;
+    font-size: 13px;
+    text-shadow: 1px 1px 1px #fff;
+}
+.form-style-3 fieldset{
+    height: 580px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    margin: 0px 0px 10px 0px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    background: #fafafa;
+    box-shadow: inset 0px 0px 15px #fafafa;
+    -moz-box-shadow: inset 0px 0px 15px #fafafa;
+    -webkit-box-shadow: inset 0px 0px 15px #fafafa;
+}
+.form-style-3 fieldset legend{
+    color: #666;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-radius: 5px 5px 0px 0px;
+    -webkit-border-radius: 5px 5px 0px 0px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    background: #fafafa;
+    padding: 0px 8px 3px 8px;
+    box-shadow: -0px -1px 2px red;
+    -moz-box-shadow:-0px -1px 2px #fafafa;
+    -webkit-box-shadow:-0px -1px 2px #fafafa;
+    font-weight: normal;
+    font-size: 12px;
+}
+.form-style-3 textarea{
+    width:250px;
+    height:50px;
+}
+.form-style-3 input[type=text],
+.form-style-3 input[type=date],
+.form-style-3 input[type=datetime],
+.form-style-3 input[type=number],
+.form-style-3 input[type=search],
+.form-style-3 input[type=time],
+.form-style-3 input[type=url],
+.form-style-3 select,
+.form-style-3 textarea{
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border: 1px solid #ccc;
+    outline: none;
+    color: black;
+    padding: 5px 8px 5px 8px;
+    box-shadow: inset 1px 1px 4px #ccc;
+    -moz-box-shadow: inset 1px 1px 4px #ccc;
+    -webkit-box-shadow: inset 1px 1px 4px #ccc;
+    background: #ccc;
+    width:50%;
+}
+.form-style-3  input[type=submit],
+.form-style-3  input[type=button]{
+    background: #ccc;
+    /*border: 1px solid #C94A81;*/
+    border: 1px solid #ccc;
+    padding: 5px 15px 5px 15px;
+    color: #ccc;
+    box-shadow: inset -1px -1px 3px #fafafa;
+    -moz-box-shadow: inset -1px -1px 3px #fafafa;
+    -webkit-box-shadow: inset -1px -1px 3px #fafafa;
+    border-radius: 3px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;   
+    font-weight: bold;
+}
+.required{
+    color:red;
+    font-weight:normal;
+}
+
+/*.form-style-6{
+    font: 95% Arial, Helvetica, sans-serif;
+    max-width: 400px;
+    margin: 10px auto;
+    padding: 16px;
+    background: #F7F7F7;
+}
+.form-style-6 h1{
+    background: #43D1AF;
+    padding: 20px 0;
+    font-size: 140%;
+    font-weight: 300;
+    text-align: center;
+    color: #fff;
+    margin: -16px -16px 16px -16px;
+}*/
+</style>
+
+
+
+<form name="contacts" id="contacts" action="." method="post">
+    {% csrf_token %}
+
+    <center>
+
+    <table border="5">
+
+        <div class="form-style-3">
+        <form>
+        <fieldset><legend><b>CLIENT VISIT REPORT<b></legend>
+        <label for="field1"><span>Project Name <span class="required">*</span></span><input type="text" class="input-field" name="field1" value="" /></label>
+        <label for="field1"><span>Client Name <span class="required">*</span></span><input type="text" class="input-field" name="field1" value="" /></label>
+        <label for="field1"><span>Visit Location <span class="required">*</span></span><input type="text" class="input-field" name="field1" value="" /></label>
+        <label for="field1"><span>Date Of Visit <span class="required">*</span></span><input type="text" id="date_of_visit" class="input-field" name="field1" value="" /></label>
+        <label for="field1"><span>Arrival Time <span class="required">*</span></span><input type="time" name="field1" /></label>
+        <label for="field1"><span>Departure Time <span class="required">*</span></span><input type="time" name="field1" /></label>
+        
+       
+        <label for="field6"><span>Comments <span class="required">*</span></span><textarea name="field6" class="textarea-field"></textarea></label>
+        <label for="field6"><span>Reason For Visit <span class="required">*</span></span><textarea name="field6" class="textarea-field"></textarea></label>
+        <label for="field6"><span>Actions Taken<br>During The Visit <span class="required">*</span></span><textarea name="field6" class="textarea-field"></textarea></label>
+        <label for="field6"><span>Next Plan Of Action <span class="required">*</span></span><textarea name="field6" class="textarea-field"></textarea></label>
+        <!-- <label><span></span><input type="submit" value="Submit" /></label> -->
+
+        <label for="field1"><span>Request To <span class="required">*</span></span><input type="text" class="input-field" name="field1" value="" /></label>
+        <!--  <label for="field1"><span>date_of_approval <span class="required">*</span></span><input type="text" id="date_of_approval" class="input-field" name="field1" value="" /></label> -->
+        </fieldset>
+        </form>
+        </div>
+
+    
+    </table>
+    <a href="/client_visit_report/" button type="submit" class="save btn btn-default">{{action}}</a>
+
+
+    </center> 
+
+                 
+</form>
+
+
+{% endblock %} 
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <form method="POST" class="cvrForm">{% csrf_token %}
+    {{form.as_table}}
+    {% for field in form %}
+    <div class="form-group">
+        <label id='project_name'>Project Name:</label>
+        {{ field }}
+    </div>
+
+    {% endfor %}
+    <button type="submit" class="save btn btn-default">{{action}}</button>
+</form>
+
+
+
+
+
+<form method="POST" class="cvrForm">{% csrf_token %}
+
+    {{form.as_table}}
+
+
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="save btn btn-default">{{action}}</button>
+            </div>
+        </div>
+    </form>
+
+ -->
